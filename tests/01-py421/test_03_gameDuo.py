@@ -2,6 +2,7 @@ import sys
 workDir= __file__.split('/tests/')[0]
 sys.path.insert( 1, workDir )
 
+from hacka import Pod
 from src.hackagames.py421 import GameMaster, GameDuo as Game
 
 # ------------------------------------------------------------------------ #
@@ -35,12 +36,14 @@ def test_421duo_init():
     subject.engine.setOnStateStr( "2-6-3-1" )
     assert subject.engine.stateStr() == "2-6-3-1"
 
+    print( subject.playerHand(1) )
     assert str( subject.playerHand(1) ).splitlines() == [
         "421-Duo : :",
         "- Horizon : 2 :",
         "- Dices : 6 3 1 : 106",
         "- Opponent : 0 0 0 : 0"]
 
+    print( subject.playerHand(2) )
     assert str( subject.playerHand(2) ).splitlines() == [
         "421-Duo : :",
         "- Horizon : 0 :",
@@ -48,18 +51,17 @@ def test_421duo_init():
         "- Opponent : 6 3 1 : 106"]
 
 def test_421duo_play():
-
     subject= Game()
-    aPod= subject.initialize()
+    subject.initialize()
     subject.engine.setOnStateStr( "2-6-3-1" )
 
-    assert subject.applyPlayerAction( 1, "roll-keep-keep" ) == False
+    assert subject.applyAction( 1, Pod("roll-keep-keep") ) == False
     assert subject._lastPlayer == 0
-    assert subject.applyPlayerAction( 1, "roll-keep-keep" ) 
+    assert subject.applyAction( 1, Pod("roll-keep-keep") ) 
     assert subject._lastPlayer == 1
-    assert subject.applyPlayerAction( 2, "r-r-r" ) == False
+    assert subject.applyAction( 2, Pod("r-r-r") ) == False
     assert subject._lastPlayer == 1
-    assert subject.applyPlayerAction( 2, "keep-keep-keep" ) 
+    assert subject.applyAction( 2, Pod("keep-keep-keep") ) 
     assert subject._lastPlayer == 2
 
 # Test firstAI launch
@@ -88,7 +90,7 @@ def test_421duo_score():
     assert subject.playerScore( 1 ) == 0
     assert subject.playerScore( 2 ) == 0
 
-# Test firstAI launch
+# Test Game Master
 def test_421solo_gameMaster():
     gameMaster= GameMaster("Duo")
 

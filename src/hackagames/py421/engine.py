@@ -82,7 +82,6 @@ class Engine421() :
                 ok= False 
         return ok
     
-
     def scoreDices(self, dices):
         return self.score( { die:face for die, face in zip( ["D1", "D2", "D3"], dices ) } )
 

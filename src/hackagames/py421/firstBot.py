@@ -41,9 +41,8 @@ class Bot( hacka.Player ) :
         self._dices= gameState.child(2).integers()
         self._score= gameState.child(2).value(1)
 
-
     def decide(self):
-        return random.choice( self.actions() )
+        return hacka.Pod( random.choice( self.actions() ) )
 
     def sleep(self, result):
         self._horizon= -1

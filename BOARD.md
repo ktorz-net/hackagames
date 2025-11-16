@@ -7,3 +7,13 @@
 [ ] `hgame` command
 
 
+## Game Py421
+
+
+## Game Labyrinth
+
+▉▛▀▀▜▉ 
+▉▌⍃⍄▐▉ last move : up/down/left/right
+▉▙▄▄▟▉ cooldown  : 29
+
+## Game C421
