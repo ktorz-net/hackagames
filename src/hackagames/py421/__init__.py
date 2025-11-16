@@ -4,16 +4,17 @@ HackaGame - Game - Single421
 """
 import sys
 
-from ... import py as hkpy
+import warnings, hacka
 from . import engine as ge
 
 # Modes:
 #Game2Players= mode2players.Game
 
-class GameSolo( hkpy.AbsSequentialGame ) :
+class GameSolo( hacka.AbsGame ) :
 
-    def __init__(self):
-        super().__init__(1)
+    # Accessors: 
+    def numberOfPlayer(self):
+        return 1
     
     # Game interface :
     def initialize(self):
@@ -21,13 +22,13 @@ class GameSolo( hkpy.AbsSequentialGame ) :
         self.engine= ge.Engine421()
         self.engine.initialize()
         self.score= 0
-        return hkpy.Pod().initialize( '421-Solo' )
+        return hacka.Pod().initialize( '421-Solo' )
     
     def playerHand( self, iPlayer ):
         # Return the game elements in the player vision (an AbsGamel)
-        gameElements= hkpy.Pod().initialize( '421-Solo' )
-        gameElements.append( hkpy.Pod().initialize( 'Horizon', [ self.engine.turn() ] ) )
-        gameElements.append( hkpy.Pod().initialize( 'Dices',
+        gameElements= hacka.Pod().initialize( '421-Solo' )
+        gameElements.append( hacka.Pod().initialize( 'Horizon', [ self.engine.turn() ] ) )
+        gameElements.append( hacka.Pod().initialize( 'Dices',
                                         self.engine.dices(),
                                         [ self.engine.currentScore() ] ) )
         return gameElements
@@ -45,17 +46,18 @@ class GameSolo( hkpy.AbsSequentialGame ) :
         # return the player score for the current game (usefull at game ending)
         return self.score
 
-
-class GameDuo( hkpy.AbsSequentialGame ) :
+class GameDuo( hacka.AbsGame ) :
 
     # Constructor: 
     def __init__(self):
-        super().__init__(2)
         self._startHorizon= 3
         self._refDices= [0, 0 ,0]
         self._lastPlayer= 0
 
     # Accessors: 
+    def numberOfPlayer(self):
+        return 2
+    
     def refDices(self) :
         return self._refDices
 
@@ -65,7 +67,7 @@ class GameDuo( hkpy.AbsSequentialGame ) :
         self.engine.initialize(self._startHorizon)
         self._refDices= [0, 0 ,0]
         self._lastPlayer= 0
-        return hkpy.Pod().initialize( '421-Duo' )
+        return hacka.Pod().initialize( '421-Duo' )
 
     def playerHand( self, iPlayer ):
         if (self._lastPlayer == 0 and iPlayer == 1) or (self._lastPlayer != 0 and iPlayer == 2) :
@@ -75,14 +77,14 @@ class GameDuo( hkpy.AbsSequentialGame ) :
 
     def currentPlayerHand( self ):
         # Return the game elements in the player vision (an AbsGamel)
-        gameElements= hkpy.Pod().initialize( '421-Duo' )
-        gameElements.append( hkpy.Pod().initialize( 'Horizon', [ self.engine.turn() ] ) )
-        gameElements.append( hkpy.Pod().initialize( 'Dices',
+        gameElements= hacka.Pod().initialize( '421-Duo' )
+        gameElements.append( hacka.Pod().initialize( 'Horizon', [ self.engine.turn() ] ) )
+        gameElements.append( hacka.Pod().initialize( 'Dices',
                                         self.engine.dices(),
                                         [ self.engine.currentScore() ] 
                                     )
                             )
-        gameElements.append( hkpy.Pod().initialize( 'Opponent',
+        gameElements.append( hacka.Pod().initialize( 'Opponent',
                                        self.refDices(),
                                        [ self.engine.scoreDices( self.refDices() ) ]
                                     )
@@ -91,14 +93,14 @@ class GameDuo( hkpy.AbsSequentialGame ) :
     
     def opponentPlayerHand( self ):
         # Return the game elements in the player vision (an AbsGamel)
-        gameElements= hkpy.Pod().initialize( '421-Duo' )
-        gameElements.append( hkpy.Pod().initialize( 'Horizon', [ 0 ] ) )
-        gameElements.append( hkpy.Pod().initialize( 'Dices',
+        gameElements= hacka.Pod().initialize( '421-Duo' )
+        gameElements.append( hacka.Pod().initialize( 'Horizon', [ 0 ] ) )
+        gameElements.append( hacka.Pod().initialize( 'Dices',
                                        self.refDices(),
                                        [ self.engine.scoreDices( self.refDices() ) ]
                                     )
                             )
-        gameElements.append( hkpy.Pod().initialize( 'Opponent',
+        gameElements.append( hacka.Pod().initialize( 'Opponent',
                                         self.engine.dices(),
                                         [ self.engine.currentScore() ] 
                                     )
@@ -142,3 +144,14 @@ class GameDuo( hkpy.AbsSequentialGame ) :
             return -1
         else :
             return 0
+
+class GameMaster( hacka.SequentialGameMaster ):
+    def __init__( self, mode= "Solo" ):
+        if mode == "Solo" :
+            game= GameSolo()
+        elif mode == "Duo" :
+            game= GameDuo()
+        else :
+            warnings.warn('Py421::GameMaster: Unrecognized mode, should be "Solo" or "Duo"')
+            game= GameSolo()
+        super().__init__( game, game.numberOfPlayer() )

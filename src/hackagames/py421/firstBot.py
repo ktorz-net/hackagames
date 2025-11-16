@@ -2,8 +2,7 @@
 """
 First Bot for 421
 """
-import random
-from ... import py as hkpy
+import random, hacka
 
 # script :
 def main() :
@@ -15,7 +14,7 @@ def log( aString ):
     #print( aString )
     pass
 
-class Bot( hkpy.AbsPlayer ) :
+class Bot( hacka.Player ) :
 
     def __init__(self):
         self._horizon= -1
