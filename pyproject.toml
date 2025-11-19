@@ -22,9 +22,10 @@ classifiers = [
 name = "hackagames"
 
 [project.scripts]
-hacka-py421-test = "hacka:player.connect"
-hacka-py421-game = "hacka:echogame.serve"
-hacka-py421-play = "hacka:player.connect"
+hacka-py421-play = "hackagames:py421.play"
+hacka-py421-launch = "hackagames:py421.launch"
+hacka-py421-connect = "hackagames:py421.connect"
+hacka-py421-firstBot = "hackagames:py421.firstBot.connect"
 
 [project.urls]
 Homepage = "https://ktorz-net.github.io/hackagames"

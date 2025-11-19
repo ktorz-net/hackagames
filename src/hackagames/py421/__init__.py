@@ -5,10 +5,7 @@ HackaGame - Game - Single421
 import sys
 
 import warnings, hacka
-from . import engine as ge
-
-# Modes:
-#Game2Players= mode2players.Game
+from . import engine as ge, firstBot
 
 class GameSolo( hacka.AbsGame ) :
 
@@ -159,3 +156,51 @@ class GameMaster( hacka.SequentialGameMaster ):
             warnings.warn('Py421::GameMaster: Unrecognized mode, should be "Solo" or "Duo"')
             game= GameSolo()
         super().__init__( game, game.numberOfPlayer() )
+
+def command():
+    from hacka.command import Command, Option
+
+    cmd= Command( "play",
+    [
+        Option( "port", "p", default=1400 ),
+        Option( "number", "n", 1, "number of games" )
+    ],
+    "Play to hackagames py421. ARGUMENTS can be: Solo or Duo" )
+
+    # Process the command line: 
+    cmd.process()
+    if not cmd.ready() :
+        print( cmd.help() )
+        return False
+    return cmd
+
+def play():
+    from hacka.player import PlayerShell
+    from .firstBot import Bot as Opponent
+
+    # Process the command line: 
+    cmd= command()
+    if not cmd :
+        exit()
+
+    # Start the player the command line: 
+    if cmd.argument() in [ "Duo", "duo" ] :
+        gameMaster= GameMaster("Duo")
+        results= gameMaster.launchLocal(  [PlayerShell(), Opponent()], cmd.option("number") )  
+    else :
+        gameMaster= GameMaster("Solo")
+        gameMaster.launchLocal(  [PlayerShell()], cmd.option("number") )  
+
+def launch():
+    # Process the command line: 
+    cmd= command()
+    if not cmd :
+        exit()
+
+   # Start the player the command line: 
+    mode= "Solo"
+    if cmd.argument() in [ "Duo", "duo" ] :
+        mode= "Duo"
+    
+    gameMaster= GameMaster(mode)
+    gameMaster.launchOnNet( cmd.option("number"), cmd.option("port") )

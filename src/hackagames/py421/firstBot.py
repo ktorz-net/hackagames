@@ -5,7 +5,7 @@ First Bot for 421
 import random, hacka
 
 # script :
-def main() :
+def connect() :
     bot= Bot()
     results= bot.takeASeat()
     print( f"\n## Statistics:\n\tAverage: { float(sum(results))/len(results) }" )
@@ -47,7 +47,6 @@ class Bot( hacka.Player ) :
     def sleep(self, result):
         self._horizon= -1
 
-
 # script :
 if __name__ == '__main__' :
-    main()
+    connect()
