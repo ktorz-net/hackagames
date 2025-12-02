@@ -31,7 +31,7 @@ class GameSolo( hacka.AbsGame ) :
         return gameElements
 
     def applyAction( self, iPlayer, podAction ):
-        assert type(podAction) == hacka.Pod
+        assert type(podAction) == type( hacka.Pod() )
         action= podAction.label()
         # Apply the action choosen by the player iPlayer. return a boolean at True if the player terminate its actions for the current turn.
         self.score= self.engine.step( action )
@@ -107,7 +107,7 @@ class GameDuo( hacka.AbsGame ) :
         return gameElements
     
     def applyAction( self, iPlayer, podAction ):
-        assert type(podAction) == hacka.Pod
+        assert type(podAction) == type( hacka.Pod() )
         action= podAction.label()
         # Apply the action choosen by the player iPlayer. return a boolean at True if the player terminate its actions for the current turn.
         self.engine.step( action )

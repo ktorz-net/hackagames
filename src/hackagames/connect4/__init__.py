@@ -26,7 +26,7 @@ class Game( hk.AbsGame ) :
         return self._grid.asPod()
 
     def applyAction( self, iPlayer, podAction ):
-        assert type(podAction) == hk.Pod
+        assert type(podAction) == type( hk.Pod() )
         action= podAction.label()
         options= self._grid.possibilities()
         if not action in options :

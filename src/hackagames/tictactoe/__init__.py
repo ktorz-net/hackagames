@@ -26,7 +26,7 @@ class Game( hk.AbsGame ):
         return pod
 
     def applyAction( self, iPlayer, podAction ):
-        assert type(podAction) == hk.Pod
+        assert type(podAction) == type( hk.Pod() )
         action= podAction.label()
         # Apply the action choosen by the player iPlayer. return a boolean at True if the player terminate its actions for the current turn.
         ok= self.grid.apply( iPlayer, action )
