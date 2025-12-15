@@ -4,6 +4,8 @@ HackaGames - Game - TicTacToe
 """
 import hacka as hk
 from . import engine
+from . import firstBot
+from . import shell
 
 class Game( hk.AbsGame ):
 
@@ -57,3 +59,53 @@ class Game( hk.AbsGame ):
 class TictactoeMaster( hk.SequentialGameMaster ):
     def __init__(self, mode="classic" ):
         super().__init__(Game(mode), 2)
+
+
+def command():
+    from hacka.command import Command, Option
+
+    cmd= Command( "play",
+    [
+        Option( "port", "p", default=1400 ),
+        Option( "number", "n", 1, "number of games" )
+    ],
+    "Start TicTacToe Game. ARGUMENTS can be: 'classic' or 'ultimate'" )
+
+    # Process the command line: 
+    cmd.process()
+    if not cmd.ready() :
+        print( cmd.help() )
+        return False
+    return cmd
+
+def play():
+    from .shell import PlayerShell
+    from .firstBot import Bot
+    
+    # Process the command line: 
+    cmd= command()
+    if not cmd :
+        exit()
+    
+    mode= "classic"
+    if cmd.argument() == "ultimate" :
+        mode= "ultimate"
+    
+    gameMaster= TictactoeMaster(mode)
+    gameMaster.launchLocal(  [PlayerShell(), Bot()], cmd.option("number") )  
+
+def launch():
+    # Process the command line: 
+    cmd= command()
+    if not cmd :
+        exit()
+    
+    mode= "classic"
+    if cmd.argument() == "ultimate" :
+        mode= "ultimate"
+    
+    gameMaster= TictactoeMaster(mode)
+    gameMaster.launchOnNet( cmd.option("number"), cmd.option("port") )
+
+def connect():
+    assert False == "To do..."

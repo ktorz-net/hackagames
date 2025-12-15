@@ -6,7 +6,7 @@ import random
 import hacka as hk
 from .grid import Grid
 
-def main() :
+def connect() :
     player= Bot()
     player.takeASeat()
 
@@ -57,4 +57,4 @@ class Bot(hk.Player) :
         return s
 # Script :
 if __name__ == '__main__' :
-    main()
+    connect()

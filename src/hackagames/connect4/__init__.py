@@ -7,6 +7,7 @@ sys.path.insert(1, __file__.split('Connect4')[0])
 import hacka as hk
 from . import grid
 from . import firstBot
+from . import shell
 
 Grid= grid.Grid
 

@@ -6,7 +6,7 @@ import hacka as hk
 from .grid import playerSymbols, Grid
 
 # Script
-def main() :
+def connect() :
     player= PlayerShell()
     player.takeASeat()
 
@@ -40,4 +40,4 @@ class PlayerShell(hk.Player) :
 
 # Script :
 if __name__ == '__main__' :
-    main()
+    connect()

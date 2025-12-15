@@ -4,7 +4,7 @@ build-backend = "flit_core.buildapi"
 
 [project]
 name = "hackagames"
-version = "0.2.3"
+version = "0.2.4"
 authors = [
   { name="Guillaume Lozenguez", email="guillaume@drods.fr" },
 ]
@@ -24,18 +24,17 @@ name = "hackagames"
 [project.scripts]
 hacka-py421-play = "hackagames:py421.play"
 hacka-py421-launch = "hackagames:py421.launch"
-hacka-py421-connect = "hackagames:py421.connect"
+hacka-py421-connect = "hacka:player.connect"
 hacka-py421-firstBot = "hackagames:py421.firstBot.connect"
-
 
 hacka-connect4-play = "hackagames:connect4.play"
 hacka-connect4-launch = "hackagames:connect4.launch"
-hacka-connect4-connect = "hackagames:connect4.connect"
+hacka-connect4-connect = "hackagames:connect4.shell.connect"
 hacka-connect4-firstBot = "hackagames:connect4.firstBot.connect"
 
 hacka-tictactoe-play = "hackagames:tictactoe.play"
 hacka-tictactoe-launch = "hackagames:tictactoe.launch"
-hacka-tictactoe-connect = "hackagames:tictactoe.connect"
+hacka-tictactoe-connect = "hackagames:tictactoe.shell.connect"
 hacka-tictactoe-firstBot = "hackagames:tictactoe.firstBot.connect"
 
 hacka-zombb-play = "hackagames:zombb.play"

@@ -6,11 +6,11 @@ import hacka as hk
 from .grid import Grid
 
 # Script
-def main() :
-    player= Interface()
+def connect() :
+    player= PlayerShell()
     player.takeASeat()
 
-class Interface(hk.Player) :
+class PlayerShell(hk.Player) :
 
     def __init__(self):
         super().__init__()
@@ -20,8 +20,8 @@ class Interface(hk.Player) :
     
     # Player interface :
     def wakeUp(self, playerId, numberOfPlayers, gamePod):
-        game= gamePod.label()
-        mode= gamePod.status() # Attention c'est tout cassé...
+        print(gamePod)
+        game, mode= tuple( gamePod.label().split("-") )
         assert( game == 'TicTacToe')
         assert( mode in ['Classic', 'Ultimate'] )
         # Reports:
@@ -45,14 +45,14 @@ class Interface(hk.Player) :
     def perceive(self, gameState):
         # update the game state:
         self.grid.update( gameState.children()[:-1] )
-        self.targets= gameState.children()[-1].integer()
+        self.targets= gameState.children()[-1].integers()
         # Reports:
         os.system("clear")
         print( self )
 
     def decide(self):
         action = input('Enter your action: ')
-        return action
+        return hk.Pod( action )
     
     def sleep(self, result):
         print( f'---\ngame end\nresult: {result}')
@@ -74,4 +74,4 @@ class Interface(hk.Player) :
 
 # script :
 if __name__ == '__main__' :
-    main()
+    connect()
