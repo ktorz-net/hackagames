@@ -6,6 +6,7 @@ import sys, random
 sys.path.insert(1, __file__.split('Connect4')[0])
 import hacka as hk
 from . import grid
+from . import firstBot
 
 Grid= grid.Grid
 
@@ -48,3 +49,43 @@ class Game( hk.AbsGame ) :
 class Connect4Master( hk.SequentialGameMaster ) :
     def __init__(self, nbColumns=7, nbLines=6) :
         super().__init__( Game(nbColumns, nbLines), 2 )
+
+def command():
+    from hacka.command import Command, Option
+
+    cmd= Command( "play",
+    [
+        Option( "port", "p", default=1400 ),
+        Option( "number", "n", 1, "number of games" )
+    ],
+    "Start interactive Game. Game do not take ARGUMENT." )
+
+    # Process the command line: 
+    cmd.process()
+    if not cmd.ready() :
+        print( cmd.help() )
+        return False
+    return cmd
+
+def play():
+    from .shell import PlayerShell
+    from .firstBot import Bot
+    
+    # Process the command line: 
+    cmd= command()
+    if not cmd :
+        exit()
+    
+    gameMaster= Connect4Master()
+    gameMaster.launchLocal(  [PlayerShell(), Bot()], cmd.option("number") )  
+
+def launch():
+    # Process the command line: 
+    cmd= command()
+    if not cmd :
+        exit()
+    gameMaster= Connect4Master()
+    gameMaster.launchOnNet( cmd.option("number"), cmd.option("port") )
+
+def connect():
+    assert False == "To do..."

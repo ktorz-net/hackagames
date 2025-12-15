@@ -7,10 +7,10 @@ from .grid import playerSymbols, Grid
 
 # Script
 def main() :
-    player= Interface()
+    player= PlayerShell()
     player.takeASeat()
 
-class Interface(hk.Player) :
+class PlayerShell(hk.Player) :
 
     def __init__(self):
         super().__init__()
@@ -33,7 +33,7 @@ class Interface(hk.Player) :
 
     def decide(self):
         action = input('Enter your action: ')
-        return action
+        return hk.Pod(action)
     
     def sleep(self, result):
         print( f'---\ngame end\nresult: {result}')

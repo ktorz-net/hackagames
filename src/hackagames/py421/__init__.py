@@ -186,7 +186,7 @@ def play():
     # Start the player the command line: 
     if cmd.argument() in [ "Duo", "duo" ] :
         gameMaster= GameMaster("Duo")
-        results= gameMaster.launchLocal(  [PlayerShell(), Opponent()], cmd.option("number") )  
+        gameMaster.launchLocal(  [PlayerShell(), Opponent()], cmd.option("number") )  
     else :
         gameMaster= GameMaster("Solo")
         gameMaster.launchLocal(  [PlayerShell()], cmd.option("number") )  

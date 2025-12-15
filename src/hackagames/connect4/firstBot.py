@@ -6,7 +6,7 @@ import hacka as hk
 from .grid import Grid
 
 # Script
-def main() :
+def connect() :
     player= Bot()
     results= player.takeASeat()
     print( f"Average: {sum(results)/len(results)}" )
@@ -41,4 +41,4 @@ class Bot( hk.Player ):
 
 # Script :
 if __name__ == '__main__' :
-    main()
+    connect()
