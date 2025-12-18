@@ -5,7 +5,7 @@ HackaGame - Game - Single421
 import sys
 
 import warnings, hacka
-from . import engine as ge, firstBot
+from . import engine as ge
 
 class GameSolo( hacka.AbsGame ) :
 
