@@ -13,7 +13,7 @@ Align Hackagames with hackapy0.5.1
 
 [ ] Connect Bots with arguments (server, port)
 [ ] With color (python rich)
-
+[ ] Automatic test of shell commands (with input/output)
 
 ## PixGames
 

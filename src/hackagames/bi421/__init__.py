@@ -63,19 +63,9 @@ class GameSolo( py421.GameSolo ) :
             gameElements.append( hacka.Pod( 'Img', handline ) )
         return gameElements
 
-class GameDuo( py421.GameDuo ) :
-    def __init__(self):
-        assert False == "ToDo"
-
 class GameMaster( hacka.SequentialGameMaster ):
     def __init__( self, mode= "Solo" ):
-        if mode == "Solo" :
-            game= GameSolo( True, 11, 12 )
-        elif mode == "Duo" :
-            game= GameDuo()
-        else :
-            warnings.warn('Py421::GameMaster: Unrecognized mode, should be "Solo" or "Duo"')
-            game= GameSolo( True, 11, 12 )
+        game= GameSolo( True, 11, 12 )
         super().__init__( game, game.numberOfPlayer() )
 
 def command():
@@ -86,7 +76,7 @@ def command():
         Option( "port", "p", default=1400 ),
         Option( "number", "n", 1, "number of games" )
     ],
-    "Play to hackagames bi421. ARGUMENTS can be: Solo or Duo" )
+    "Play to hackagames bi421 (No argument)" )
 
     # Process the command line: 
     cmd.process()
@@ -105,12 +95,8 @@ def play():
         exit()
 
     # Start the player the command line: 
-    if cmd.argument() in [ "Duo", "duo" ] :
-        gameMaster= GameMaster("Duo")
-        gameMaster.launchLocal(  [PlayerShell(), Opponent()], cmd.option("number") )  
-    else :
-        gameMaster= GameMaster("Solo")
-        gameMaster.launchLocal(  [PlayerShell()], cmd.option("number") )  
+    gameMaster= GameMaster()
+    gameMaster.launchLocal(  [PlayerShell()], cmd.option("number") )  
 
 def launch():
     # Process the command line: 
@@ -118,10 +104,6 @@ def launch():
     if not cmd :
         exit()
 
-   # Start the player the command line: 
-    mode= "Solo"
-    if cmd.argument() in [ "Duo", "duo" ] :
-        mode= "Duo"
-    
-    gameMaster= GameMaster(mode)
+    # Start the player the command line: 
+    gameMaster= GameMaster()
     gameMaster.launchOnNet( cmd.option("number"), cmd.option("port") )

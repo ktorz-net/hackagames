@@ -64,13 +64,4 @@ def test_421_firstbot_GameMaster():
     average= sum(results)/len(results)
     assert 140 < average and average < 180
 
-    # Duo:
-    gameMaster= GameMaster("Duo")
-    results= gameMaster.launchLocal( [Bot(), Bot()], 1000 )
-
-    assert len(results) == 2
-    for r in results:
-        assert len(r) == 1000
-        average= sum(r)/len(r)
-        assert -0.1 < average and average < +0.1
     
