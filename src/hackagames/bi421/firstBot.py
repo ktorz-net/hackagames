@@ -11,22 +11,20 @@ def connect() :
     results= bot.takeASeat()
     print( f"\n## Statistics:\n\tAverage: { float(sum(results))/len(results) }" )
 
-def log( aString ):
-    #print( aString )
-    pass
-
 class Bot( hacka.Player ) :
 
     def __init__(self):
+        super().__init__()
         self._horizon= -1
-        self._dices= [0, 0, 0]
+        self._score= 0
+        self._dicesImage= [[0]]
 
     # Accessors :
     def horizon(self):
         return self._horizon
 
     def dices(self):
-        return self._dices
+        return self._dicesImage
     
     def actions(self):
         return [ 'keep-keep-keep', 'keep-keep-roll', 'keep-roll-keep', 'keep-roll-roll',
@@ -35,7 +33,8 @@ class Bot( hacka.Player ) :
     # Player interface :
     def wakeUp(self, playerId, numberOfPlayers, gameConf):
         self._horizon= -1
-        self._dices= [0, 0, 0]
+        self._score= 0
+        self._dicesImage= [[0]]
 
     def perceive(self, gameState):
         imgSize= gameState.integer(1)

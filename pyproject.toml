@@ -27,6 +27,11 @@ hacka-py421-launch = "hackagames:py421.launch"
 hacka-py421-connect = "hacka:player.connect"
 hacka-py421-firstBot = "hackagames:py421.firstBot.connect"
 
+hacka-bi421-play = "hackagames:bi421.play"
+hacka-bi421-launch = "hackagames:bi421.launch"
+hacka-bi421-connect = "hackagames:bi421.shell.connect"
+hacka-bi421-firstBot = "hackagames:bi421.firstBot.connect"
+
 hacka-connect4-play = "hackagames:connect4.play"
 hacka-connect4-launch = "hackagames:connect4.launch"
 hacka-connect4-connect = "hackagames:connect4.shell.connect"

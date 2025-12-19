@@ -15,17 +15,22 @@ Align Hackagames with hackapy0.5.1
 [ ] With color (python rich)
 
 
-## Binary Image Games
+## PixGames
 
- [ ] Implement a Binary Player  ▘▝ ▀▖▗▘▙▚▛▜▝▞▟▄▌▐ ▐ █
- [ ] set a Bi421 (Binary Image 421 game)
+ [x] Initialize a Bi421 (Binary Image 421 game)
 ▐▀▀▀▜   █▀▀▀▀▀▀▀█  █▀▀▀▀▀▀▀█  █▀▀▀▀▀▀▀█  █▀▀▀▀▀▀▀█  █▀▀▀▀▀▀▀█  █▀▀▀▀▀▀▀█
 ▐▝  ▐   █ ▀     █  █       █  █ ▀   ▀ █  █ ▀   ▀ █  █  ▄    █  █       █
 ▐ ▝ ▐   █   ▀   █  █   ▀   █  █   ▀   █  █ ▀   ▀ █  █    ▄  █  █       █
 ▐  ▝▐   █     ▀ █  █       █  █ ▀   ▀ █  █ ▀   ▀ █  █       █  █       █
 ▝▀▀▀▀   ▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀
+ [x] Implement a Binary rendering  ▘▝ ▀▖▗▘▙▚▛▜▝▞▟▄▌▐ ▐ █
+ [ ] set a B.I. player shell 
  [ ] Introduce DeepRL with a tuto on [PPO](https://en.wikipedia.org/wiki/Proximal_policy_optimization).
- 
+ [ ] get action in the random order.
+ [ ] Move BinIm. to hackapy rather than hackagames ?
+ [ ] Activate Duo mode
+ [ ] Set a frame on shell image
+
 ## Game Cofee Fleet
 
 A Pick and Delivery under uncertainty...
@@ -89,7 +94,6 @@ State :
 [ ] Split action
 
 Room : Name (Hall, Corridor, Room, Office, Kitchen, Stairs,...), deep, potential zombies, potential treasure, nb de-6, doors
- 
 
 Danger : Value/6
 Team : number(6), 4/6
@@ -105,7 +109,6 @@ Charset:
 ┌───┐ ┌╴▿╶┐ ┌─┬─┐
 │◖1◗  ▹◖1◗◃ ├   ┤     
 └───┘ └╴▵╶┘ └─┴─┼
-
 
 ## Game C421
 
