@@ -1,5 +1,6 @@
 # HackaGames - To Do list
 
+
 ## Hacka 0.5.1
 
 Align Hackagames with hackapy0.5.1
@@ -8,14 +9,11 @@ Align Hackagames with hackapy0.5.1
 [x] Make Connect4 tests working
 [x] Make TicTacToe tests working
 [x] Generate play, launch, connect and firstBot commands
+[ ] Adopt (Gym/PPO) vocabulary: `player.wakeup(configuration) - player.perceive(observation)` and `game.forward(action)`
+[ ] Change Pod to DataTree
 
-## Shell games
 
-[ ] Connect Bots with arguments (server, port)
-[ ] With color (python rich)
-[ ] Automatic test of shell commands (with input/output)
-
-## PixGames
+## PixGames and DeepRL
 
  [x] Initialize a Bi421 (Binary Image 421 game)
 ▐▀▀▀▜   █▀▀▀▀▀▀▀█  █▀▀▀▀▀▀▀█  █▀▀▀▀▀▀▀█  █▀▀▀▀▀▀▀█  █▀▀▀▀▀▀▀█  █▀▀▀▀▀▀▀█
@@ -24,12 +22,19 @@ Align Hackagames with hackapy0.5.1
 ▐  ▝▐   █     ▀ █  █       █  █ ▀   ▀ █  █ ▀   ▀ █  █       █  █       █
 ▝▀▀▀▀   ▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀
  [x] Implement a Binary rendering  ▘▝ ▀▖▗▘▙▚▛▜▝▞▟▄▌▐ ▐ █
- [ ] set a B.I. player shell 
- [ ] Introduce DeepRL with a tuto on [PPO](https://en.wikipedia.org/wiki/Proximal_policy_optimization).
- [ ] get action in the random order.
- [ ] Move BinIm. to hackapy rather than hackagames ?
+ [x] Set a Bi421 shell-player.  
+ [ ] Introduce DeepRL with a specific tuto.
+ [ ] Get action in the random order.
  [ ] Activate Duo mode
- [ ] Set a frame on shell image
+ [ ] Generalize the solution on hackapy (BinIm) (?)
+
+
+## Hacka-Process and shell games
+
+[ ] Connect Bots with arguments (server, port)
+[ ] With color (python rich)
+[ ] Automatic test of shell commands (with input/output)
+
 
 ## Game Cofee Fleet
 
