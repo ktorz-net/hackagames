@@ -10,8 +10,8 @@ from src.hackagames.py421 import GameMaster, GameSolo as Game
 
 def test_421solo_init():
     game= Game()
-    aPod= game.initialize()
-    assert str(aPod) == '421-Solo : :'
+    aDataTree= game.initialize()
+    assert str(aDataTree) == '421-Solo : :'
     assert game.numberOfPlayer() == 1
 
     dices= game.engine.dices()
@@ -44,11 +44,11 @@ def test_421solo_gameMaster():
     gameMaster= GameMaster()
 
     assert gameMaster.numberOfPlayers() == 1
-    aPod= gameMaster.game().initialize()
-    assert str(aPod) == '421-Solo : :'
+    aDataTree= gameMaster.game().initialize()
+    assert str(aDataTree) == '421-Solo : :'
 
     gameMaster= GameMaster("Solo")
 
     assert gameMaster.numberOfPlayers() == 1
-    aPod= gameMaster.game().initialize()
-    assert str(aPod) == '421-Solo : :'
+    aDataTree= gameMaster.game().initialize()
+    assert str(aDataTree) == '421-Solo : :'

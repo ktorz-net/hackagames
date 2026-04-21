@@ -4,12 +4,12 @@ build-backend = "flit_core.buildapi"
 
 [project]
 name = "hackagames"
-version = "0.2.5"
+version = "0.2.6"
 authors = [
   { name="Guillaume Lozenguez", email="guillaume@drods.fr" },
 ]
 description = "An Hackable Games' Engine (python version)"
-dependencies = ["hacka==0.5.3"]
+dependencies = ["hacka==0.6.0"]
 readme = "docs/pypip-index.md"
 requires-python = ">=3.8"
 classifiers = [

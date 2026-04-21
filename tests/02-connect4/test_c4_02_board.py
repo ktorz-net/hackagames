@@ -122,10 +122,10 @@ def test_GridStr():
     for l1, l2 in zip_multiline( str(grid), test ) :
         assert l1 == l2
     
-def test_podInterface():
+def test_dataTreeInterface():
     grid= game.Grid()
 
-    pod= grid.asPod()
+    dataTree= grid.asDataTree()
     test= ( "Connect4 : :\n"
             "- column-A : 0 0 0 0 0 0 :\n"
             "- column-B : 0 0 0 0 0 0 :\n"
@@ -135,14 +135,14 @@ def test_podInterface():
             "- column-F : 0 0 0 0 0 0 :\n"
             "- column-G : 0 0 0 0 0 0 :")
     
-    print( f"```\n{pod}\n(vs)\n{test}\n```" )
+    print( f"```\n{dataTree}\n(vs)\n{test}\n```" )
 
-    for l1, l2 in zip_multiline( str(pod), test ) :
+    for l1, l2 in zip_multiline( str(dataTree), test ) :
         assert( l1 == l2 )
 
-    pod.child(4).setIntegers( [1,2,0, 0,0,0] )
-    pod.pop(7)
-    grid.initializeFrom( pod )
+    dataTree.child(4).setIntegers( [1,2,0, 0,0,0] )
+    dataTree.pop(7)
+    grid.initializeFrom( dataTree )
 
     test= ( "  A   B   C   D   E   F\n"
             "|   |   |   |   |   |   |\n"
@@ -167,7 +167,7 @@ def test_podInterface():
         [0,1,2, 1,1,2]
     ]
 
-    gridBis= game.Grid().initializeFrom( grid.asPod() )
+    gridBis= game.Grid().initializeFrom( grid.asDataTree() )
 
     assert( grid._pos == gridBis._pos )
 

@@ -19,20 +19,20 @@ class GameSolo( hacka.AbsGame ) :
         self.engine= ge.Engine421()
         self.engine.initialize()
         self.score= 0
-        return hacka.Pod().initialize( '421-Solo' )
+        return hacka.DataTree().initialize( '421-Solo' )
     
     def playerHand( self, iPlayer ):
         # Return the game elements in the player vision (an AbsGamel)
-        gameElements= hacka.Pod().initialize( '421-Solo' )
-        gameElements.append( hacka.Pod().initialize( 'Horizon', [ self.engine.turn() ] ) )
-        gameElements.append( hacka.Pod().initialize( 'Dices',
+        gameElements= hacka.DataTree().initialize( '421-Solo' )
+        gameElements.append( hacka.DataTree().initialize( 'Horizon', [ self.engine.turn() ] ) )
+        gameElements.append( hacka.DataTree().initialize( 'Dices',
                                         self.engine.dices(),
                                         [ self.engine.currentScore() ] ) )
         return gameElements
 
-    def applyAction( self, iPlayer, podAction ):
-        assert type(podAction) == type( hacka.Pod() )
-        action= podAction.label()
+    def applyAction( self, iPlayer, actionTree ):
+        assert type(actionTree) == type( hacka.DataTree() )
+        action= actionTree.label()
         # Apply the action choosen by the player iPlayer. return a boolean at True if the player terminate its actions for the current turn.
         self.score= self.engine.step( action )
         return True
@@ -66,7 +66,7 @@ class GameDuo( hacka.AbsGame ) :
         self.engine.initialize(self._startHorizon)
         self._refDices= [0, 0 ,0]
         self._lastPlayer= 0
-        return hacka.Pod().initialize( '421-Duo' )
+        return hacka.DataTree().initialize( '421-Duo' )
 
     def playerHand( self, iPlayer ):
         if (self._lastPlayer == 0 and iPlayer == 1) or (self._lastPlayer != 0 and iPlayer == 2) :
@@ -76,14 +76,14 @@ class GameDuo( hacka.AbsGame ) :
 
     def currentPlayerHand( self ):
         # Return the game elements in the player vision (an AbsGamel)
-        gameElements= hacka.Pod().initialize( '421-Duo' )
-        gameElements.append( hacka.Pod().initialize( 'Horizon', [ self.engine.turn() ] ) )
-        gameElements.append( hacka.Pod().initialize( 'Dices',
+        gameElements= hacka.DataTree().initialize( '421-Duo' )
+        gameElements.append( hacka.DataTree().initialize( 'Horizon', [ self.engine.turn() ] ) )
+        gameElements.append( hacka.DataTree().initialize( 'Dices',
                                         self.engine.dices(),
                                         [ self.engine.currentScore() ] 
                                     )
                             )
-        gameElements.append( hacka.Pod().initialize( 'Opponent',
+        gameElements.append( hacka.DataTree().initialize( 'Opponent',
                                        self.refDices(),
                                        [ self.engine.scoreDices( self.refDices() ) ]
                                     )
@@ -92,23 +92,23 @@ class GameDuo( hacka.AbsGame ) :
     
     def opponentPlayerHand( self ):
         # Return the game elements in the player vision (an AbsGamel)
-        gameElements= hacka.Pod().initialize( '421-Duo' )
-        gameElements.append( hacka.Pod().initialize( 'Horizon', [ 0 ] ) )
-        gameElements.append( hacka.Pod().initialize( 'Dices',
+        gameElements= hacka.DataTree().initialize( '421-Duo' )
+        gameElements.append( hacka.DataTree().initialize( 'Horizon', [ 0 ] ) )
+        gameElements.append( hacka.DataTree().initialize( 'Dices',
                                        self.refDices(),
                                        [ self.engine.scoreDices( self.refDices() ) ]
                                     )
                             )
-        gameElements.append( hacka.Pod().initialize( 'Opponent',
+        gameElements.append( hacka.DataTree().initialize( 'Opponent',
                                         self.engine.dices(),
                                         [ self.engine.currentScore() ] 
                                     )
                             )
         return gameElements
     
-    def applyAction( self, iPlayer, podAction ):
-        assert type(podAction) == type( hacka.Pod() )
-        action= podAction.label()
+    def applyAction( self, iPlayer, actionTree ):
+        assert type(actionTree) == type( hacka.DataTree() )
+        action= actionTree.label()
         # Apply the action choosen by the player iPlayer. return a boolean at True if the player terminate its actions for the current turn.
         self.engine.step( action )
         if iPlayer == 1 and self.engine.isEnded() :

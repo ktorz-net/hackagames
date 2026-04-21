@@ -21,15 +21,15 @@ class Game( hk.AbsGame ) :
     # Game interface :
     def initialize(self):
         self._grid= Grid( self._nbColumns, self._nbLines )
-        return hk.Pod().initialize( 'Connect4', [ self._nbColumns, self._nbLines ] )
+        return hk.DataTree().initialize( 'Connect4', [ self._nbColumns, self._nbLines ] )
         
     def playerHand( self, iPlayer ):
         # Return the game elements in the player vision (an AbsGamel)
-        return self._grid.asPod()
+        return self._grid.asDataTree()
 
-    def applyAction( self, iPlayer, podAction ):
-        assert type(podAction) == type( hk.Pod() )
-        action= podAction.label()
+    def applyAction( self, iPlayer, actionTree ):
+        assert type(actionTree) == type( hk.DataTree() )
+        action= actionTree.label()
         options= self._grid.possibilities()
         if not action in options :
             action= random.choice( options )

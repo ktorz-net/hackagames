@@ -42,22 +42,22 @@ class Grid() :
             return True
         return False
     
-    # PodInterface:
-    def asPod(self):
-        pod= hk.Pod().initialize("Connect4")
+    # DataTreeInterface:
+    def asDataTree(self):
+        dt= hk.DataTree().initialize("Connect4")
         for i in range( self.columnSize() ) :
-            pod.append( hk.Pod().initialize( f"column-{chr(ord('A')+i)}", self._pos[i]) )
-        return pod
+            dt.append( hk.DataTree().initialize( f"column-{chr(ord('A')+i)}", self._pos[i]) )
+        return dt
     
-    def initializeFrom(self, pod):
-        self._max= len( pod.child(1).integers() )
+    def initializeFrom(self, dataTree):
+        self._max= len( dataTree.child(1).digits() )
         self._pos= []
-        for kid in pod.children() :
-            self._pos.append( [ kid.integer(i) for i in range(1, self._max+1) ] )
+        for kid in dataTree.children() :
+            self._pos.append( [ kid.digit(i) for i in range(1, self._max+1) ] )
         return self
 
     def copy(self):
-        return Grid().initializeFrom( self.asPod() )
+        return Grid().initializeFrom( self.asDataTree() )
 
     # Tools:
     def verticals(self):

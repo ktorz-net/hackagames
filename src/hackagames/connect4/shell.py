@@ -18,11 +18,11 @@ class PlayerShell(hk.Player) :
         self.playerId= 0
         
     # Player interface :
-    def wakeUp(self, playerId, numberOfPlayers, gamePod):
+    def wakeUp(self, playerId, numberOfPlayers, gameContextTree):
         self.playerId= playerId
-        assert( gamePod.label() == 'Connect4')
+        assert( gameContextTree.label() == 'Connect4')
         # Reports:
-        print( f'---\nwake-up player-{playerId} ({numberOfPlayers} players) - dimention: {gamePod.integer()}')
+        print( f'---\nwake-up player-{playerId} ({numberOfPlayers} players) - dimention: {gameContextTree.digit()}')
 
     def perceive(self, gameState):
         # update the game state:
@@ -33,7 +33,7 @@ class PlayerShell(hk.Player) :
 
     def decide(self):
         action = input('Enter your action: ')
-        return hk.Pod(action)
+        return hk.DataTree(action)
     
     def sleep(self, result):
         print( f'---\ngame end\nresult: {result}')

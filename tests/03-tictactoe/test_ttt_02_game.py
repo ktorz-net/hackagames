@@ -14,8 +14,8 @@ from src.hackagames.tictactoe import Game, TictactoeMaster
 #------------------------
 def test_risky_initializeClassic():
   game= Game()
-  pod= game.initialize()
-  assert str(pod) == "TicTacToe-Classic : :"
+  dataTree= game.initialize()
+  assert str(dataTree) == "TicTacToe-Classic : :"
 
   print( f"<<\n{game.playerHand(1)}\n>>" )
 
@@ -40,8 +40,8 @@ Grid : :
 #------------------------
 def test_risky_initializeUltimate():
   game= Game("ultimate")
-  pod= game.initialize()
-  assert str(pod) == "TicTacToe-Ultimate : :"
+  dataTree= game.initialize()
+  assert str(dataTree) == "TicTacToe-Ultimate : :"
   assert f"\n{game.playerHand(1)}\n" == """
 Grid : :
 - Line-A : 0 0 0 0 0 0 0 0 0 :

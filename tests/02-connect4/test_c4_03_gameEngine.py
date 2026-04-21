@@ -19,16 +19,16 @@ def assert_multiline( text1, text2 ) :
 
 def test_initialize():
     game= connect4.Game( 5, 4 )
-    pod= game.initialize()
+    dataTree= game.initialize()
 
     test= ( "Connect4 : 5 4 :" )
-    assert_multiline( str(pod), test )
+    assert_multiline( str(dataTree), test )
     
     game= connect4.Game()
-    pod= game.initialize()
+    dataTree= game.initialize()
 
     test= ( "Connect4 : 7 6 :" )
-    assert_multiline( str(pod), test )
+    assert_multiline( str(dataTree), test )
 
     grid= connect4.Grid().initializeFrom( game.playerHand(1) ) 
 
@@ -44,20 +44,20 @@ def test_initialize():
 
 def test_play():
     game= connect4.Game()
-    pod= game.initialize()
+    dataTree= game.initialize()
 
-    assert( game.applyAction(1, hk.Pod("B")) )
-    assert( game.applyAction(2, hk.Pod("A")) )
-    assert( game.applyAction(1, hk.Pod("A")) )
-    assert( game.applyAction(2, hk.Pod("B")) )
-    assert( game.applyAction(1, hk.Pod("G")) )
-    assert( game.applyAction(2, hk.Pod("G")) )
-    assert( game.applyAction(1, hk.Pod("E")) )
-    assert( game.applyAction(2, hk.Pod("E")) )
-    assert( game.applyAction(1, hk.Pod("B")) )
-    assert( game.applyAction(2, hk.Pod("B")) )
-    assert( game.applyAction(1, hk.Pod("B")) )
-    assert( game.applyAction(2, hk.Pod("C")) )
+    assert( game.applyAction(1, hk.DataTree("B")) )
+    assert( game.applyAction(2, hk.DataTree("A")) )
+    assert( game.applyAction(1, hk.DataTree("A")) )
+    assert( game.applyAction(2, hk.DataTree("B")) )
+    assert( game.applyAction(1, hk.DataTree("G")) )
+    assert( game.applyAction(2, hk.DataTree("G")) )
+    assert( game.applyAction(1, hk.DataTree("E")) )
+    assert( game.applyAction(2, hk.DataTree("E")) )
+    assert( game.applyAction(1, hk.DataTree("B")) )
+    assert( game.applyAction(2, hk.DataTree("B")) )
+    assert( game.applyAction(1, hk.DataTree("B")) )
+    assert( game.applyAction(2, hk.DataTree("C")) )
 
     grid1= connect4.Grid().initializeFrom( game.playerHand(1) ) 
     grid2= connect4.Grid().initializeFrom( game.playerHand(2) ) 
@@ -78,9 +78,9 @@ def test_play():
     assert( game.playerScore(1) == 0 )
     assert( game.playerScore(2) == 0 )
 
-    assert( game.applyAction(1,  hk.Pod("F")) )
-    assert( game.applyAction(2,  hk.Pod("C")) )
-    assert( game.applyAction(1,  hk.Pod("D")) )
+    assert( game.applyAction(1,  hk.DataTree("F")) )
+    assert( game.applyAction(2,  hk.DataTree("C")) )
+    assert( game.applyAction(1,  hk.DataTree("D")) )
 
     grid1= connect4.Grid().initializeFrom( game.playerHand(1) ) 
     grid2= connect4.Grid().initializeFrom( game.playerHand(2) ) 
@@ -130,8 +130,8 @@ def test_statusquo():
     assert( game.playerScore(1) == 0 )
     assert( game.playerScore(2) == 0 )
 
-    assert( game.applyAction(1, hk.Pod("F")) )
-    assert( game.applyAction(2, hk.Pod("B")) )
+    assert( game.applyAction(1, hk.DataTree("F")) )
+    assert( game.applyAction(2, hk.DataTree("B")) )
 
     assert( game.isEnded() )
     assert( game.playerScore(1) == 0 )

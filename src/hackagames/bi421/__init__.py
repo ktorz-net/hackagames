@@ -36,8 +36,8 @@ class GameSolo( py421.GameSolo ) :
 
     def playerHand( self, iPlayer ):
         # Return the game elements in the player vision (an AbsGamel)
-        gameElements= hacka.Pod( '421-Solo', [9, 9] )
-        gameElements.append( hacka.Pod( 'Status', [ self.engine.turn() ], [ self.engine.currentScore() ] ) )
+        gameElements= hacka.DataTree( '421-Solo', [9, 9] )
+        gameElements.append( hacka.DataTree( 'Status', [ self.engine.turn() ], [ self.engine.currentScore() ] ) )
 
         # Get dices
         dices= [d for d in self.engine.dices()]
@@ -60,7 +60,7 @@ class GameSolo( py421.GameSolo ) :
 
         # Update gameElements :
         for handline in handimg :
-            gameElements.append( hacka.Pod( 'Img', handline ) )
+            gameElements.append( hacka.DataTree( 'Img', handline ) )
         return gameElements
 
 class GameMaster( hacka.SequentialGameMaster ):

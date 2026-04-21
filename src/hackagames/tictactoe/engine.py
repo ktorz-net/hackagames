@@ -13,12 +13,12 @@ class Classic() :
     def name(self):
         return "Classic"
 
-    def asPod(self):
-        pod= hk.Pod().initialize( 'Grid' )
+    def asDataTree(self):
+        dataTree= hk.DataTree().initialize( 'Grid' )
         for l in ["A", "B", "C"]:
-            pod.append( hk.Pod().initialize( f"Line-{l}", self.grid[l][1:4] ) )
-        pod.append( hk.Pod().initialize( "Targets", [1]) )
-        return pod
+            dataTree.append( hk.DataTree().initialize( f"Line-{l}", self.grid[l][1:4] ) )
+        dataTree.append( hk.DataTree().initialize( "Targets", [1]) )
+        return dataTree
     
     def isEnded(self) :
         return self.isWinning(1) or self.isWinning(2) or self.count(0) == 0
@@ -93,12 +93,12 @@ class Ultimate() :
             
         return abss, ords
     
-    def asPod(self):
-        pod= hk.Pod().setLabel( "Grid" )
+    def asDataTree(self):
+        dataTree= hk.DataTree().setLabel( "Grid" )
         for l in ["A", "B", "C", "D", "E", "F", "G", "H", "I"]:
-            pod.append( hk.Pod().initialize( f"Line-{l}", self.grid[l][1:10]) )
-        pod.append( hk.Pod().initialize( "Targets", self.targets) )
-        return pod
+            dataTree.append( hk.DataTree().initialize( f"Line-{l}", self.grid[l][1:10]) )
+        dataTree.append( hk.DataTree().initialize( "Targets", self.targets) )
+        return dataTree
         
     def apply(self, playerId, position):
         if self.isValidAction( position ) :

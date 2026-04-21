@@ -20,16 +20,16 @@ class Game( hk.AbsGame ):
         else :
             self.grid= engine.Classic()
         self.count= 4
-        return hk.Pod().initialize( "TicTacToe-"+self.grid.name() )
+        return hk.DataTree().initialize( "TicTacToe-"+self.grid.name() )
 
     def playerHand( self, iPlayer ):
-        # Return the game elements in the player vision (a POD)
-        pod= self.grid.asPod()
-        return pod
+        # Return the game elements in the player vision (a DataTree)
+        datatree= self.grid.asDataTree()
+        return datatree
 
-    def applyAction( self, iPlayer, podAction ):
-        assert type(podAction) == type( hk.Pod() )
-        action= podAction.label()
+    def applyAction( self, iPlayer, actionTree ):
+        assert type(actionTree) == type( hk.DataTree() )
+        action= actionTree.label()
         # Apply the action choosen by the player iPlayer. return a boolean at True if the player terminate its actions for the current turn.
         ok= self.grid.apply( iPlayer, action )
         if ok or self.count < 1 :

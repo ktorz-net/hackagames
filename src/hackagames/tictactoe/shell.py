@@ -19,9 +19,9 @@ class PlayerShell(hk.Player) :
         self.targets= [0] # The target area where the player can play. A list of number from 1 to 9
     
     # Player interface :
-    def wakeUp(self, playerId, numberOfPlayers, gamePod):
-        print(gamePod)
-        game, mode= tuple( gamePod.label().split("-") )
+    def wakeUp(self, playerId, numberOfPlayers, gameContextTree):
+        print(gameContextTree)
+        game, mode= tuple( gameContextTree.label().split("-") )
         assert( game == 'TicTacToe')
         assert( mode in ['Classic', 'Ultimate'] )
         # Reports:
@@ -45,14 +45,14 @@ class PlayerShell(hk.Player) :
     def perceive(self, gameState):
         # update the game state:
         self.grid.update( gameState.children()[:-1] )
-        self.targets= gameState.children()[-1].integers()
+        self.targets= gameState.children()[-1].digits()
         # Reports:
         os.system("clear")
         print( self )
 
     def decide(self):
         action = input('Enter your action: ')
-        return hk.Pod( action )
+        return hk.DataTree( action )
     
     def sleep(self, result):
         print( f'---\ngame end\nresult: {result}')

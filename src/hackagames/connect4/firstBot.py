@@ -23,9 +23,9 @@ class Bot( hk.Player ):
         self.playerId= 0
         
     # Player interface :
-    def wakeUp(self, playerId, numberOfPlayers, gamePod):
+    def wakeUp(self, playerId, numberOfPlayers, gameContextTree):
         self.playerId= playerId
-        assert( gamePod.label() == 'Connect4')
+        assert( gameContextTree.label() == 'Connect4')
         
     def perceive(self, gameState):
         # update the game state:
@@ -34,7 +34,7 @@ class Bot( hk.Player ):
     def decide(self):
         options = self.grid.possibilities()
         action = random.choice( options )
-        return hk.Pod(action)
+        return hk.DataTree(action)
     
     def sleep(self, result):
         log( f'---\ngame end on result: {result}')

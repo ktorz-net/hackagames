@@ -19,9 +19,9 @@ class Grid() :
             range(1, 4)
         )
 
-    def update( self, pods ):
-        for elt in pods :
-            self._[ elt.label().split("-")[1] ]= [0] + elt.integers()
+    def update( self, dataTrees ):
+        for dataTree in dataTrees :
+            self._[ dataTree.label().split("-")[1] ]= [0] + dataTree.digits()
         return self
     
     def at(self, abs, ord):

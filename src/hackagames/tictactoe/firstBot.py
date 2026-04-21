@@ -17,23 +17,23 @@ class Bot(hk.Player) :
         self.possibilities= [0]
     
     # Player interface :
-    def wakeUp(self, playerId, numberOfPlayers, gamePod ):
-        assert( gamePod.label() in ['TicTacToe-Classic', 'TicTacToe-Ultimate'] )
+    def wakeUp(self, playerId, numberOfPlayers, gameContextTree ):
+        assert( gameContextTree.label() in ['TicTacToe-Classic', 'TicTacToe-Ultimate'] )
         self.playerId= playerId
         # Initialize the grid
-        self.grid= Grid( gamePod.label().split('-')[1] )
+        self.grid= Grid( gameContextTree.label().split('-')[1] )
         self.possibilities= [1]
 
     def perceive(self, gameState):
         # Update the grid:
         self.grid.update( gameState.children()[:-1] )
-        self.possibilities= gameState.children()[-1].integers()
+        self.possibilities= gameState.children()[-1].digits()
 
     def decide(self):
         # Get all actions
         actions= self.listActions()
         # Select one 
-        return hk.Pod( random.choice( actions ) )
+        return hk.DataTree( random.choice( actions ) )
     
     #def sleep(self, result):
         #print( f'---\ngame end\nresult: {result}')
@@ -55,6 +55,7 @@ class Bot(hk.Player) :
         for iGrid in self.possibilities[1:] :
             s+= ", "+ posStr[iGrid]
         return s
+
 # Script :
 if __name__ == '__main__' :
     connect()

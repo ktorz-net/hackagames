@@ -3,7 +3,7 @@ workDir= __file__.split('/tests/')[0]
 sys.path.insert( 1, workDir )
 
 # Import a game and player(s):
-from hacka import Pod
+from hacka import DataTree
 import hacka
 from src.hackagames.py421 import GameMaster, GameSolo as Game
 from src.hackagames.py421.firstBot import Bot
@@ -20,7 +20,7 @@ def test_421_firstbot_functions():
     bot.wakeUp( 1, 1, game.initialize() )
     bot.perceive( game.playerHand(1) )
     action= bot.decide()
-    assert type(action) == Pod
+    assert type(action) == DataTree
 
 def test_421_firstbot_launch():
     # Instanciate them:
@@ -39,7 +39,7 @@ def test_421_firstbot_launch():
     print( f'HackaGame: process one game' )
 
     action= tabletop.activatePlayer( 1, game.playerHand(1) )
-    assert type(action) == hacka.Pod
+    assert type(action) == hacka.DataTree
     print( f"Action: {action}" )
 
     assert game.applyAction(1, action)

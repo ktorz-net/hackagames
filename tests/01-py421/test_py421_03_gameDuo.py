@@ -2,7 +2,7 @@ import sys
 workDir= __file__.split('/tests/')[0]
 sys.path.insert( 1, workDir )
 
-from hacka import Pod
+from hacka import DataTree
 from src.hackagames.py421 import GameMaster, GameDuo as Game
 
 # ------------------------------------------------------------------------ #
@@ -11,8 +11,8 @@ from src.hackagames.py421 import GameMaster, GameDuo as Game
 
 def test_421duo_init():
     subject= Game()
-    aPod= subject.initialize()
-    assert str(aPod) == '421-Duo : :'
+    aDataTree= subject.initialize()
+    assert str(aDataTree) == '421-Duo : :'
 
     assert subject.refDices() == [0, 0 ,0]
     assert subject._lastPlayer == 0
@@ -55,13 +55,13 @@ def test_421duo_play():
     subject.initialize()
     subject.engine.setOnStateStr( "2-6-3-1" )
 
-    assert subject.applyAction( 1, Pod("roll-keep-keep") ) == False
+    assert subject.applyAction( 1, DataTree("roll-keep-keep") ) == False
     assert subject._lastPlayer == 0
-    assert subject.applyAction( 1, Pod("roll-keep-keep") ) 
+    assert subject.applyAction( 1, DataTree("roll-keep-keep") ) 
     assert subject._lastPlayer == 1
-    assert subject.applyAction( 2, Pod("r-r-r") ) == False
+    assert subject.applyAction( 2, DataTree("r-r-r") ) == False
     assert subject._lastPlayer == 1
-    assert subject.applyAction( 2, Pod("keep-keep-keep") ) 
+    assert subject.applyAction( 2, DataTree("keep-keep-keep") ) 
     assert subject._lastPlayer == 2
 
 # Test firstAI launch
@@ -95,5 +95,5 @@ def test_421solo_gameMaster():
     gameMaster= GameMaster("Duo")
 
     assert gameMaster.numberOfPlayers() == 2
-    aPod= gameMaster.game().initialize()
-    assert str(aPod) == '421-Duo : :'
+    aDataTree= gameMaster.game().initialize()
+    assert str(aDataTree) == '421-Duo : :'

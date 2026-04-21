@@ -19,7 +19,7 @@ class PlayerShell(hk.Player) :
         self._dices= [[0]]
         
     # Player interface :
-    def wakeUp(self, playerId, numberOfPlayers, gamePod):
+    def wakeUp(self, playerId, numberOfPlayers, gameContextTree):
         self._horizon= -1
         self._score= 0
         self._dicesImage= [[0]]
@@ -28,11 +28,11 @@ class PlayerShell(hk.Player) :
 
     def perceive(self, gameState):
         # update the game state:
-        imgSize= gameState.integer(1)
-        self._horizon= gameState.child(1).integer(1)
+        imgSize= gameState.digit(1)
+        self._horizon= gameState.child(1).digit(1)
         self._score= gameState.child(1).value(1)
         self._dicesImage= [
-            line.integers() for line in gameState.children()[1:2+imgSize]
+            line.digits() for line in gameState.children()[1:2+imgSize]
         ]
         # Reports:
         os.system("clear")
@@ -41,7 +41,7 @@ class PlayerShell(hk.Player) :
 
     def decide(self):
         action = input('Enter your action: ')
-        return hk.Pod(action)
+        return hk.DataTree(action)
     
     def sleep(self, result):
         print( f'---\ngame end\nresult: {result}')

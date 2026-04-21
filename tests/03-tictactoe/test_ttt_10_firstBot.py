@@ -16,7 +16,7 @@ from src.hackagames.tictactoe.firstBot import Bot
 #------------------------
 def test_ttt_firstBot():
   game= Game()
-  pod= game.initialize()
+  dt= game.initialize()
   player= Bot()
 
   print( player )
@@ -28,7 +28,7 @@ def test_ttt_firstBot():
 3       
 actions: """
 
-  player.wakeUp(1, 2, pod)
+  player.wakeUp(1, 2, dt)
 
   print( player )
   
@@ -47,7 +47,7 @@ x: A B C
 3       
 actions: A:C-1:3"""
 
-  game.applyAction(1, hk.Pod("A-1") )
+  game.applyAction(1, hk.DataTree("A-1") )
   player.perceive( game.playerHand(1) )
   assert "\n"+ str(player)  == """
 x: A B C
@@ -56,8 +56,8 @@ x: A B C
 3       
 actions: A:C-1:3"""
 
-  game.applyAction(2, hk.Pod("B-3") )
-  game.applyAction(1, hk.Pod("C-2") )
+  game.applyAction(2, hk.DataTree("B-3") )
+  game.applyAction(1, hk.DataTree("C-2") )
   player.perceive( game.playerHand(1) )
   assert "\n"+ str(player)  == """
 x: A B C
@@ -72,9 +72,9 @@ actions: A:C-1:3"""
 #------------------------------------------------------------------------------------------------
 def test_ttt_botMethods():
   game= Game()
-  pod= game.initialize()
+  dt= game.initialize()
   player= Bot()
-  player.wakeUp(1, 2, pod)
+  player.wakeUp(1, 2, dt)
   player.perceive( game.playerHand(1) )
 
   print( player )
@@ -87,9 +87,9 @@ actions: A:C-1:3"""
 
   assert player.listActions() == ['A-1', 'A-2', 'A-3', 'B-1', 'B-2', 'B-3', 'C-1', 'C-2', 'C-3']
 
-  game.applyAction(1, hk.Pod("A-1") )
-  game.applyAction(2, hk.Pod("B-3") )
-  game.applyAction(1, hk.Pod("C-2") )
+  game.applyAction(1, hk.DataTree("A-1") )
+  game.applyAction(2, hk.DataTree("B-3") )
+  game.applyAction(1, hk.DataTree("C-2") )
   player.perceive( game.playerHand(1) )
   assert "\n"+ str(player)  == """
 x: A B C
@@ -110,7 +110,7 @@ def test_ttt_Bot():
   bot.wakeUp( 1, 1, game.initialize() )
   bot.perceive( game.playerHand(1) )
   action= bot.decide()
-  assert type(action) == hk.Pod
+  assert type(action) == hk.DataTree
   
 #------------------------------------------------------------------------------------------------
 # Test Play Classic
@@ -126,9 +126,9 @@ def test_ttt_2Bots():
 #------------------------------------------------------------------------------------------------
 def test_ttt_Ulitimate():
   game= Game("ultimate")
-  pod= game.initialize()
+  dt= game.initialize()
   player= Bot()
-  player.wakeUp(1, 2, pod)
+  player.wakeUp(1, 2, dt)
   player.perceive( game.playerHand(1) )
 
   assert "\n"+ str(player)  == """
@@ -152,10 +152,10 @@ actions: A:C-1:3, A:C-4:6, D:F-4:6"""
     'D-4', 'D-5', 'D-6', 'E-4', 'E-5', 'E-6', 'F-4', 'F-5', 'F-6'
   ]
 
-  game.applyAction(1, hk.Pod("A-1") )
-  game.applyAction(2, hk.Pod("B-3") )
-  game.applyAction(1, hk.Pod("E-8") )
-  game.applyAction(2, hk.Pod("E-6") )
+  game.applyAction(1, hk.DataTree("A-1") )
+  game.applyAction(2, hk.DataTree("B-3") )
+  game.applyAction(1, hk.DataTree("E-8") )
+  game.applyAction(2, hk.DataTree("E-6") )
 
   player.perceive( game.playerHand(1) )
 

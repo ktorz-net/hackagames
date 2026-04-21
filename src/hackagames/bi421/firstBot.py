@@ -31,22 +31,22 @@ class Bot( hacka.Player ) :
             'roll-keep-keep', 'roll-keep-roll', 'roll-roll-keep', 'roll-roll-roll' ]
     
     # Player interface :
-    def wakeUp(self, playerId, numberOfPlayers, gameConf):
+    def wakeUp(self, playerId, numberOfPlayers, gameContextTree):
         self._horizon= -1
         self._score= 0
         self._dicesImage= [[0]]
 
     def perceive(self, gameState):
-        imgSize= gameState.integer(1)
-        self._horizon= gameState.child(1).integer(1)
+        imgSize= gameState.digit(1)
+        self._horizon= gameState.child(1).digit(1)
         self._score= gameState.child(1).value(1)
         self._dicesImage= [
-            line.integers() for line in gameState.children()[1:2+imgSize]
+            line.digits() for line in gameState.children()[1:2+imgSize]
         ]
         #print( d6.shell( self._dicesImage ) )
 
     def decide(self):
-        return hacka.Pod( random.choice( self.actions() ) )
+        return hacka.DataTree( random.choice( self.actions() ) )
 
     def sleep(self, result):
         self._horizon= -1

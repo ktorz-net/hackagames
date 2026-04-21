@@ -10,8 +10,8 @@ from src.hackagames.bi421 import d6, GameMaster, GameSolo as Game
 
 def test_421solo_init():
     game= Game(False)
-    aPod= game.initialize()
-    assert str(aPod) == '421-Solo : :'
+    aDataTree= game.initialize()
+    assert str(aDataTree) == '421-Solo : :'
     assert game.numberOfPlayer() == 1
 
     dices= game.engine.dices()
@@ -55,18 +55,18 @@ def test_421solo_perceive():
     assert game.engine.stateStr() == "2-6-3-1"
 
     gameState= game.playerHand(1)
-    imgSize= gameState.integer(1)
+    imgSize= gameState.digit(1)
 
     assert len( gameState.children() ) == 1+imgSize
 
-    horizon= gameState.child(1).integer(1)
+    horizon= gameState.child(1).digit(1)
     score= gameState.child(1).value(1)
 
     assert horizon == 2
     assert score == 106
 
     diceImage= [
-        line.integers() for line in gameState.children()[1:2+imgSize]
+        line.digits() for line in gameState.children()[1:2+imgSize]
     ]
 
     shellImg= d6.shell( diceImage )
@@ -92,14 +92,14 @@ def test_421solo_gameMaster():
     assert gameMaster.game().diceBox() == (11, 12)
     
     assert gameMaster.numberOfPlayers() == 1
-    aPod= gameMaster.game().initialize()
-    assert str(aPod) == '421-Solo : :'
+    aDataTree= gameMaster.game().initialize()
+    assert str(aDataTree) == '421-Solo : :'
     
     gameMaster= GameMaster("Solo")
 
     assert gameMaster.numberOfPlayers() == 1
-    aPod= gameMaster.game().initialize()
-    assert str(aPod) == '421-Solo : :'
+    aDataTree= gameMaster.game().initialize()
+    assert str(aDataTree) == '421-Solo : :'
 
 # Test firstAI launch
 def test_421solo_atRandom():
@@ -108,9 +108,9 @@ def test_421solo_atRandom():
     game.engine.setOnStateStr( "2-6-3-1" )
 
     gameState= game.playerHand(1)
-    imgSize= gameState.integer(1)
+    imgSize= gameState.digit(1)
     diceImage= [
-        line.integers() for line in gameState.children()[1:2+imgSize]
+        line.digits() for line in gameState.children()[1:2+imgSize]
     ]
 
     shellImg= d6.shell( diceImage )
@@ -126,9 +126,9 @@ def test_421solo_atRandom():
     ]
 
     gameState= game.playerHand(1)
-    imgSize= gameState.integer(1)
+    imgSize= gameState.digit(1)
     diceImage= [
-        line.integers() for line in gameState.children()[1:2+imgSize]
+        line.digits() for line in gameState.children()[1:2+imgSize]
     ]
 
     shellImg= d6.shell( diceImage )
@@ -144,9 +144,9 @@ def test_421solo_atRandom():
     ]
 
     gameState= game.playerHand(1)
-    imgSize= gameState.integer(1)
+    imgSize= gameState.digit(1)
     diceImage= [
-        line.integers() for line in gameState.children()[1:2+imgSize]
+        line.digits() for line in gameState.children()[1:2+imgSize]
     ]
 
     shellImg= d6.shell( diceImage )
@@ -162,9 +162,9 @@ def test_421solo_atRandom():
     ]
 
     gameState= game.playerHand(1)
-    imgSize= gameState.integer(1)
+    imgSize= gameState.digit(1)
     diceImage= [
-        line.integers() for line in gameState.children()[1:2+imgSize]
+        line.digits() for line in gameState.children()[1:2+imgSize]
     ]
 
     shellImg= d6.shell( diceImage )
